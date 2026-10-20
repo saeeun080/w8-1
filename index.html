@@ -1,0 +1,444 @@
+
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>영어 한입 🍀 - Read & Learn English</title>
+<style>
+@import url('https://fonts.googleapis.com/css2?family=Jua&family=Noto+Sans+KR:wght@400;500;700&display=swap');
+
+:root {
+  --green: #66ad86;
+  --dark-green: #347653;
+  --light-green: #e9f7ed;
+  --yellow: #fff1b9;
+  --pink: #ffe7e8;
+  --ink: #34453c;
+  --muted: #77877c;
+  --white: #fff;
+}
+* { box-sizing: border-box; }
+body {
+  margin: 0;
+  background: #f3f8ef;
+  color: var(--ink);
+  font-family: 'Noto Sans KR', sans-serif;
+  line-height: 1.7;
+}
+button { font: inherit; cursor: pointer; }
+button:focus-visible {
+  outline: 3px solid #e8ad39;
+  outline-offset: 3px;
+}
+.app { max-width: 780px; margin: auto; padding: 20px 16px 45px; }
+header {
+  display: flex; align-items: center; justify-content: space-between;
+  gap: 12px; margin-bottom: 22px;
+}
+.logo { font: 26px 'Jua', sans-serif; color: var(--dark-green); }
+.logo small { display: block; font: 12px 'Noto Sans KR', sans-serif; color: var(--muted); }
+.streak {
+  background: white; border: 1px solid #e0ebdc;
+  border-radius: 20px; padding: 7px 12px; font-size: 13px;
+}
+.hero {
+  background: linear-gradient(135deg, #dff4df, #fff2c9);
+  padding: 24px; border-radius: 26px; margin-bottom: 20px;
+  position: relative; overflow: hidden;
+}
+.hero h1 { font: 30px 'Jua', sans-serif; margin: 5px 0; }
+.hero p { margin: 5px 0 12px; font-size: 14px; }
+.hero .tag {
+  background: white; border-radius: 20px; padding: 5px 11px;
+  font-size: 12px; color: var(--dark-green); display: inline-block;
+}
+.hero .mascot { position: absolute; right: 20px; bottom: 8px; font-size: 74px; }
+.progress-info {
+  display: flex; justify-content: space-between; font-size: 12px;
+  color: var(--muted); margin: 0 2px 7px;
+}
+.progress-track { background: #e3e9df; height: 8px; border-radius: 9px; overflow: hidden; }
+.progress-bar { height: 100%; background: var(--green); width: 0%; transition: width .3s; }
+.card {
+  background: var(--white); padding: 22px; border-radius: 22px;
+  margin: 16px 0; box-shadow: 0 5px 18px #3b6b4210;
+}
+.section-title {
+  font: 21px 'Jua', sans-serif; margin: 0 0 14px;
+  display: flex; align-items: center; gap: 8px;
+}
+.section-title span { font-size: 24px; }
+.story-art {
+  background: #fff5dc; border-radius: 17px; text-align: center;
+  padding: 15px; font-size: 53px; margin-bottom: 16px;
+}
+.story-art p { font-size: 12px; color: #8d8067; margin: 0; }
+.story { font-size: 16px; line-height: 2.15; }
+.story p { margin: 5px 0; }
+.target {
+  background: #e7f6e9; border-radius: 8px; padding: 0 5px;
+  color: #246a43; font-weight: 700; cursor: pointer;
+}
+.translation {
+  background: #f7f8f4; padding: 12px 15px; border-radius: 12px;
+  margin-top: 14px; font-size: 13px; color: #627267;
+}
+.translation summary { cursor: pointer; font-weight: 700; color: var(--dark-green); }
+.translation p { margin-bottom: 0; }
+.word-box {
+  display: flex; flex-wrap: wrap; gap: 8px; margin-top: 15px;
+}
+.word {
+  background: #f4f6f0; border-radius: 10px; padding: 5px 10px;
+  font-size: 12px;
+}
+.word b { color: var(--dark-green); }
+.rule {
+  background: #f2f9ef; border: 1px solid #dceedd;
+  border-radius: 16px; padding: 16px; margin: 12px 0;
+}
+.rule h3 { font: 19px 'Jua', sans-serif; margin: 0 0 8px; }
+.formula {
+  background: white; border-radius: 12px; padding: 12px;
+  text-align: center; font-size: 15px; font-weight: 700;
+}
+.green { color: #328052; }
+.pink { color: #d65b76; }
+.example {
+  padding: 10px 0; border-bottom: 1px dashed #e7ece4;
+}
+.example:last-child { border-bottom: 0; }
+.example .en { font-weight: 700; }
+.example .ko { color: var(--muted); font-size: 13px; }
+.tip {
+  background: #fff5d5; padding: 12px 14px; border-radius: 12px;
+  font-size: 13px; margin-top: 12px;
+}
+.question {
+  border: 1px solid #e9eee6; border-radius: 15px;
+  padding: 15px; margin: 14px 0;
+}
+.q-title { font-weight: 700; margin-bottom: 10px; }
+.options { display: grid; gap: 8px; }
+.option {
+  border: 1px solid #e2e9df; border-radius: 11px; background: white;
+  padding: 10px 12px; text-align: left; color: var(--ink);
+  transition: .15s;
+}
+.option:hover { background: #f2f9ef; border-color: #9ec9a7; }
+.option.selected { border: 2px solid var(--green); background: #eaf7ec; }
+.option.correct { background: #e4f6e8; border-color: #54a873; }
+.option.wrong { background: #fff0f0; border-color: #df9292; }
+.option:disabled { cursor: default; }
+.feedback { font-size: 13px; margin-top: 9px; font-weight: 500; }
+.feedback.good { color: #27804b; }
+.feedback.bad { color: #c24e58; }
+.primary {
+  background: var(--dark-green); color: white; border: 0;
+  border-radius: 14px; padding: 13px 18px; font-weight: 700;
+  width: 100%; transition: .2s;
+}
+.primary:hover { background: #285e40; }
+.primary:disabled { background: #b8c8bb; cursor: not-allowed; }
+.secondary {
+  background: white; color: var(--dark-green); border: 1px solid #cfe1cf;
+  border-radius: 12px; padding: 10px 15px; font-weight: 700;
+}
+.action-row { display: flex; gap: 10px; margin-top: 14px; }
+.action-row button { flex: 1; }
+.result {
+  display: none; background: #e8f7e9; text-align: center;
+  padding: 22px; border-radius: 18px; margin-top: 16px;
+}
+.result .emoji { font-size: 45px; }
+.result h3 { font: 25px 'Jua', sans-serif; margin: 5px; }
+.result p { font-size: 14px; }
+footer { text-align: center; font-size: 12px; color: #89968a; margin-top: 28px; }
+.hidden { display: none !important; }
+@media (max-width: 480px) {
+  .app { padding: 14px 12px 30px; }
+  .hero { padding: 20px; }
+  .hero h1 { font-size: 26px; }
+  .hero .mascot { right: 12px; font-size: 60px; }
+  .card { padding: 17px; }
+  .story { font-size: 15px; }
+}
+</style>
+</head>
+<body>
+<div class="app">
+  <header>
+    <div class="logo">🍀 영어 한입 <small>Read a little, Learn a lot!</small></div>
+    <div class="streak">⭐ 오늘의 문법 공부</div>
+  </header>
+
+  <section class="hero">
+    <span class="tag">LEVEL 1 · 중학생 영어</span>
+    <h1>영어 이야기 속에서<br>문법을 발견해 봐! 📖</h1>
+    <p>읽고, 찾고, 풀면서 영어 실력을 키워 보자.</p>
+    <div class="mascot" aria-hidden="true">🐰</div>
+  </section>
+
+  <div class="progress-info">
+    <span id="progressLabel">오늘의 학습 · 1단계</span>
+    <span id="progressPercent">0% 완료</span>
+  </div>
+  <div class="progress-track"><div class="progress-bar" id="progressBar"></div></div>
+
+  <section class="card" id="reading">
+    <h2 class="section-title"><span>📚</span> STEP 1. 영어 글 읽기</h2>
+    <div class="story-art" role="img" aria-label="아침에 일어나는 토끼">
+      🌞 🐰 ☕
+      <p>A happy morning with Mina!</p>
+    </div>
+    <h3 style="font-family:Jua,sans-serif;font-size:22px;margin:0">Mina's Morning</h3>
+    <p style="font-size:13px;color:#849185;margin-top:0">미나의 아침 · 약 1분 읽기</p>
+    <div class="story">
+      <p>Mina is a middle school student.</p>
+      <p>She <span class="target" title="동사에 주목해 보세요">gets</span> up at seven every morning.</p>
+      <p>She <span class="target" title="동사에 주목해 보세요">eats</span> breakfast with her family.</p>
+      <p>Her brother <span class="target" title="동사에 주목해 보세요">likes</span> eggs, but Mina <span class="target" title="동사에 주목해 보세요">likes</span> toast.</p>
+      <p>Then, Mina <span class="target" title="동사에 주목해 보세요">goes</span> to school by bus.</p>
+      <p>She <span class="target" title="동사에 주목해 보세요">studies</span> English with her friends.</p>
+      <p>She <span class="target" title="동사에 주목해 보세요">feels</span> happy because she learns something new!</p>
+    </div>
+    <details class="translation">
+      <summary>🇰🇷 한국어 해석 보기</summary>
+      <p>미나는 중학생이다. 그녀는 매일 아침 7시에 일어난다. 가족과 함께 아침을 먹는다. 남동생은 달걀을 좋아하지만 미나는 토스트를 좋아한다. 그런 다음 버스를 타고 학교에 간다. 친구들과 영어를 공부한다. 새로운 것을 배우기 때문에 행복하다고 느낀다!</p>
+    </details>
+    <div class="word-box">
+      <span class="word"><b>get up</b> 일어나다</span>
+      <span class="word"><b>eat</b> 먹다</span>
+      <span class="word"><b>go</b> 가다</span>
+      <span class="word"><b>study</b> 공부하다</span>
+      <span class="word"><b>feel</b> 느끼다</span>
+    </div>
+    <div class="action-row">
+      <button class="secondary" onclick="markRead()">✅ 읽기 완료</button>
+      <button class="secondary" onclick="document.getElementById('grammar').scrollIntoView({behavior:'smooth'})">문법 배우기 ↓</button>
+    </div>
+  </section>
+
+  <section class="card" id="grammar">
+    <h2 class="section-title"><span>🔍</span> STEP 2. 오늘의 문법</h2>
+    <div class="rule">
+      <h3>✨ 일반동사의 현재형</h3>
+      <p style="margin:5px 0">반복되는 일상이나 습관을 말할 때 현재형을 사용해요.</p>
+      <div class="formula">
+        I / You / We / They + <span class="green">동사원형</span><br>
+        He / She / It + <span class="pink">동사-s 또는 -es</span>
+      </div>
+    </div>
+    <div class="example">
+      <div class="en">I <span class="green">like</span> pizza. 🍕</div>
+      <div class="ko">나는 피자를 좋아한다.</div>
+    </div>
+    <div class="example">
+      <div class="en">She <span class="pink">likes</span> pizza. 🍕</div>
+      <div class="ko">그녀는 피자를 좋아한다.</div>
+    </div>
+    <div class="example">
+      <div class="en">They <span class="green">study</span> English.</div>
+      <div class="ko">그들은 영어를 공부한다.</div>
+    </div>
+    <div class="example">
+      <div class="en">He <span class="pink">studies</span> English.</div>
+      <div class="ko">그는 영어를 공부한다.</div>
+    </div>
+    <div class="rule">
+      <h3>🪄 동사 변화 규칙 3가지</h3>
+      <p>① 대부분의 동사: <b>동사 + s</b><br><span class="green">like → likes, eat → eats</span></p>
+      <p>② -ch, -sh, -s, -x, -o 등으로 끝나는 일부 동사: <b>+ es</b><br><span class="green">go → goes, watch → watches</span></p>
+      <p>③ 자음 + y로 끝나는 동사: <b>y를 i로 바꾸고 + es</b><br><span class="green">study → studies, fly → flies</span></p>
+    </div>
+    <div class="tip">💡 <b>꼭 기억해!</b> 주어가 He, She, It 또는 한 사람의 이름일 때 현재형 동사에 -s나 -es가 붙는 경우가 많아요. 단, be동사와 조동사 등은 규칙이 달라요.</div>
+    <button class="primary" style="margin-top:16px" onclick="markGrammar()">문법 학습 완료! 다음 단계로 →</button>
+  </section>
+
+  <section class="card" id="quiz">
+    <h2 class="section-title"><span>🎯</span> STEP 3. 미니 퀴즈</h2>
+    <p style="font-size:13px;color:#77877c">문제를 읽고 가장 알맞은 답을 선택해 봐요. 정답을 확인하면 해설도 볼 수 있어요!</p>
+    <div id="questions"></div>
+    <button class="primary" id="checkBtn" onclick="checkAnswers()">정답 확인하기 ✨</button>
+    <div class="result" id="result" aria-live="polite">
+      <div class="emoji" id="resultEmoji">🎉</div>
+      <h3 id="resultTitle">참 잘했어요!</h3>
+      <p id="resultText"></p>
+      <button class="primary" onclick="restartQuiz()">다시 도전하기 🔄</button>
+    </div>
+  </section>
+
+  <section class="card" id="finish">
+    <h2 class="section-title"><span>🌱</span> STEP 4. 오늘의 정리</h2>
+    <p>오늘 배운 내용을 직접 말해 보세요.</p>
+    <div class="rule">
+      <p>① 일상이나 습관을 표현할 때 사용하는 시제는?</p>
+      <details><summary>정답 확인</summary><p>일반동사의 현재형</p></details>
+    </div>
+    <div class="rule">
+      <p>② She 다음에 like를 쓰면 어떻게 될까요?</p>
+      <details><summary>정답 확인</summary><p>She likes. 3인칭 단수 주어이므로 likes를 사용해요.</p></details>
+    </div>
+    <div class="rule">
+      <p>③ study의 3인칭 단수 현재형은?</p>
+      <details><summary>정답 확인</summary><p>studies. 자음 + y로 끝나므로 y를 i로 바꾸고 -es를 붙여요.</p></details>
+    </div>
+    <button class="primary" onclick="finishLesson()">🌟 오늘의 학습 완료!</button>
+    <p id="finishMessage" aria-live="polite" style="text-align:center;color:#347653;font-weight:700"></p>
+  </section>
+
+  <footer>🍀 영어 한입 · 매일 조금씩, 영어 자신감 쑥쑥!</footer>
+</div>
+
+<script>
+const quizData = [
+  {
+    q: '1. My sister _____ to school every day.',
+    options: ['go', 'goes', 'going'],
+    answer: 1,
+    explain: 'My sister는 한 사람을 가리키므로 3인칭 단수예요. go → goes!'
+  },
+  {
+    q: '2. They _____ basketball after school.',
+    options: ['plays', 'playing', 'play'],
+    answer: 2,
+    explain: 'They는 복수 주어이므로 동사원형 play를 사용해요.'
+  },
+  {
+    q: '3. Tom _____ English every evening.',
+    options: ['study', 'studies', 'studys'],
+    answer: 1,
+    explain: 'Tom은 3인칭 단수이고 study는 자음 + y로 끝나요. study → studies!'
+  },
+  {
+    q: '4. 다음 중 문법적으로 올바른 문장은?',
+    options: [
+      'She eat breakfast.',
+      'He watches TV.',
+      'Mina study English.'
+    ],
+    answer: 1,
+    explain: 'He는 3인칭 단수이고 watch는 -ch로 끝나므로 watches가 맞아요.'
+  }
+];
+
+let answers = Array(quizData.length).fill(null);
+let submitted = false;
+let readDone = false;
+let grammarDone = false;
+let quizDone = false;
+let lessonDone = false;
+
+function renderQuestions() {
+  const root = document.getElementById('questions');
+  root.innerHTML = '';
+  quizData.forEach((q, qi) => {
+    const box = document.createElement('div');
+    box.className = 'question';
+    const title = document.createElement('div');
+    title.className = 'q-title';
+    title.textContent = q.q;
+    box.appendChild(title);
+
+    const opts = document.createElement('div');
+    opts.className = 'options';
+    q.options.forEach((opt, oi) => {
+      const btn = document.createElement('button');
+      btn.type = 'button';
+      btn.className = 'option';
+      btn.textContent = String.fromCharCode(65 + oi) + '. ' + opt;
+      btn.setAttribute('aria-pressed', answers[qi] === oi ? 'true' : 'false');
+      if (answers[qi] === oi) btn.classList.add('selected');
+      if (submitted) {
+        btn.disabled = true;
+        if (oi === q.answer) btn.classList.add('correct');
+        else if (answers[qi] === oi) btn.classList.add('wrong');
+      } else {
+        btn.onclick = () => {
+          answers[qi] = oi;
+          renderQuestions();
+        };
+      }
+      opts.appendChild(btn);
+    });
+    box.appendChild(opts);
+
+    if (submitted) {
+      const fb = document.createElement('div');
+      const correct = answers[qi] === q.answer;
+      fb.className = 'feedback ' + (correct ? 'good' : 'bad');
+      fb.textContent = (correct ? '✅ 정답! ' : '💡 다시 확인해 봐요. ') + q.explain;
+      box.appendChild(fb);
+    }
+    root.appendChild(box);
+  });
+  document.getElementById('checkBtn').disabled = submitted || answers.includes(null);
+}
+
+function checkAnswers() {
+  if (answers.includes(null) || submitted) return;
+  submitted = true;
+  quizDone = true;
+  renderQuestions();
+
+  const score = answers.filter((a, i) => a === quizData[i].answer).length;
+  document.getElementById('result').style.display = 'block';
+  document.getElementById('resultEmoji').textContent =
+    score === 4 ? '🏆' : score >= 2 ? '🎉' : '🌱';
+  document.getElementById('resultTitle').textContent =
+    score === 4 ? '완벽해요!' : score >= 2 ? '잘했어요!' : '다시 도전해 봐요!';
+  document.getElementById('resultText').textContent =
+    `총 ${quizData.length}문제 중 ${score}문제를 맞혔어요! ` +
+    (score === 4 ? '3인칭 단수 규칙을 잘 이해했어요.' :
+    '아래 해설을 읽고 헷갈린 규칙을 다시 확인해 봐요.');
+  updateProgress();
+  document.getElementById('result').scrollIntoView({behavior:'smooth', block:'nearest'});
+}
+
+function restartQuiz() {
+  answers = Array(quizData.length).fill(null);
+  submitted = false;
+  quizDone = false;
+  document.getElementById('result').style.display = 'none';
+  renderQuestions();
+  updateProgress();
+  document.getElementById('quiz').scrollIntoView({behavior:'smooth'});
+}
+
+function markRead() {
+  readDone = true;
+  updateProgress();
+  document.getElementById('grammar').scrollIntoView({behavior:'smooth'});
+}
+function markGrammar() {
+  grammarDone = true;
+  updateProgress();
+  document.getElementById('quiz').scrollIntoView({behavior:'smooth'});
+}
+function finishLesson() {
+  if (!quizDone) {
+    document.getElementById('finishMessage').textContent =
+      '먼저 미니 퀴즈를 풀고 정답을 확인해 주세요! 💪';
+    document.getElementById('quiz').scrollIntoView({behavior:'smooth'});
+    return;
+  }
+  lessonDone = true;
+  updateProgress();
+  document.getElementById('finishMessage').textContent =
+    '🎉 축하해요! 오늘의 영어 문법 학습을 완료했어요!';
+}
+function updateProgress() {
+  const steps = [readDone, grammarDone, quizDone, lessonDone];
+  const count = steps.filter(Boolean).length;
+  const pct = count * 25;
+  document.getElementById('progressBar').style.width = pct + '%';
+  document.getElementById('progressPercent').textContent = pct + '% 완료';
+  document.getElementById('progressLabel').textContent =
+    lessonDone ? '오늘의 학습 · 완료!' : `오늘의 학습 · ${count + 1}단계`;
+}
+renderQuestions();
+updateProgress();
+</script>
+</body>
+</html>
